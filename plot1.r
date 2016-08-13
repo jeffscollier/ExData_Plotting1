@@ -14,8 +14,6 @@ gapHist <- function(data, basic = T, title = "Global Active Power", save = F) {
          main = title,
          breaks = 13
          )
-    
-    dev.copy(png, file="./figure/plot1.png")
   }
  else { 
     qplot(data$Global_active_power, 
@@ -27,4 +25,9 @@ gapHist <- function(data, basic = T, title = "Global Active Power", save = F) {
           col=I("black"),
           fill=I("red")) 
  }
+  
+  if(save) {
+    dev.copy(png, file="./figure/plot1.png")
+    dev.off()
+  }
 }

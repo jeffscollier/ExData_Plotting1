@@ -1,12 +1,13 @@
 library(ggplot2)
 
-grpTime <- function(data, basic = T) { 
+grpTime <- function(data, basic = T, title = "Global Reactive Power", save = F) { 
   ylabel = "Global Reactive Power"
 
   if(basic) {
     plot(data$timestamp, data$Global_reactive_power, 
          ylab = ylabel,
          xlab = "datetime",
+         title = title,
          type = "l"
     )
   }
@@ -19,9 +20,14 @@ grpTime <- function(data, basic = T) {
     #ggplot(data=data, x=Date, y=Global_active_power)
     #geom_line()
   }
+  
+  if(save) {
+    dev.copy(png, file="./figure/plot4a.png")
+    dev.off()
+  }
 }
 
-voltage <- function(data, basic = T) {
+voltage <- function(data, basic = T, title = "Voltage", save = F) {
   ylabel = "Voltage"
   
   if(basic) {
@@ -40,14 +46,24 @@ voltage <- function(data, basic = T) {
     #ggplot(data=data, x=Date, y=Global_active_power)
     #geom_line()
   }
+  
+  if(save) {
+    dev.copy(png, file="./figure/plot4b.png")
+    dev.off()
+  }
 }
 
-plotSet <- function(data, basic = T) {
+plotSet <- function(data, basic = T, save = F) {
 
   par(mfrow=c(2,2))
   gapTime(data, title = "")
   voltage(data, title = "")
   subMeter(data, title = "")
   grpTime(data, title = "")
+  par(mfrow=c(1,1))
   
+  if(save) {
+    dev.copy(png, file="./figure/plot4.png")
+    dev.off()
+  }
 }

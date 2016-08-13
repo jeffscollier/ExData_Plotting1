@@ -1,6 +1,6 @@
 library(ggplot2)
 
-subMeter <- function(data, basic = T, title="Energy Sub-Metering") {
+subMeter <- function(data, basic = T, title="Energy Sub-Metering", save = F) {
   ylabel = "Energy Sub-Metering"
   
   if(basic) {
@@ -42,4 +42,10 @@ subMeter <- function(data, basic = T, title="Energy Sub-Metering") {
     #ggplot(data=data, x=Date, y=Global_active_power)
     #geom_line()
   }
+  
+  if(save) {
+    dev.copy(png, file="./figure/plot3.png")
+    dev.off()
+  }
+  
 }
