@@ -1,6 +1,6 @@
 library(ggplot2)
 
-gapHist <- function(data, basic = T, title = "Global Active Power"s) {
+gapHist <- function(data, basic = T, title = "Global Active Power", save = F) {
   
   xlabel = "Global Active Power(kilowatts)"
   ylabel = "Frequency"
@@ -14,6 +14,8 @@ gapHist <- function(data, basic = T, title = "Global Active Power"s) {
          main = title,
          breaks = 13
          )
+    
+    dev.copy(png, file="./figure/plot1.png")
   }
  else { 
     qplot(data$Global_active_power, 
