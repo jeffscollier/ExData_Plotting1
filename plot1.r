@@ -16,7 +16,7 @@ gapHist <- function(data, basic = T, title = "Global Active Power", save = F) {
          )
   }
  else { 
-    qplot(data$Global_active_power, 
+    g <- qplot(data$Global_active_power, 
           geom="histogram",
           main=title,
           xlab = xlabel,
@@ -24,10 +24,11 @@ gapHist <- function(data, basic = T, title = "Global Active Power", save = F) {
           breaks=seq(0, 6, by=.5),
           col=I("black"),
           fill=I("red")) 
+    print(g)
  }
   
   if(save) {
-    dev.copy(png, file="./figure/plot1.png")
+    dev.copy(png, file="./plot1.png")
     dev.off()
   }
 }

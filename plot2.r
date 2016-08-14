@@ -13,18 +13,15 @@ gapTime <- function(data, basic = T, title = "Global Active Power", save = F) {
     
   }
   else { 
-    qplot(data$timestamp, data$Global_active_power, 
-        geom=c("line"), 
-        main=title,
-        xlab = "",
-        ylab = ylabel,
-        col=I("black"))
-    #ggplot(data=data, x=Date, y=Global_active_power)
-    #geom_line()
+    g <- ggplot(data = data, aes(timestamp, Global_active_power)) +
+         geom_line(color="firebrick") +
+         scale_x_datetime(date_breaks = "1 day", date_labels = "%b %d (%a)") +
+         xlab('day-of-the-week')
+    print(g)
   }
   
   if(save) {
-    dev.copy(png, file="./figure/plot2.png")
+    dev.copy(png, file="./plot2.png")
     dev.off()
   }
 }

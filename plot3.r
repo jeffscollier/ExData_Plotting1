@@ -33,18 +33,23 @@ subMeter <- function(data, basic = T, title="Energy Sub-Metering", save = F) {
            )
   }
   else { 
-    qplot(data$timestamp, data$Global_active_power, 
-          geom=c("line"), 
-          main=title,
-          xlab = "",
-          ylab = ylabel,
-          col=I("black"))
-    #ggplot(data=data, x=Date, y=Global_active_power)
-    #geom_line()
+    g <- ggplot(data, aes(timestamp, legend=T)) +
+         geom_line(aes(y=Sub_metering_1, color="1")) +
+         geom_line(aes(y=Sub_metering_2, color="2")) +
+         geom_line(aes(y=Sub_metering_3, color="3")) +
+         scale_color_hue(name = "Sub-Meter") +
+         scale_x_datetime(date_breaks = "1 day", date_labels = "%b %d (%a)") +
+         xlab('day-of-the-week') +
+         ylab(ylabel) +
+         ggtitle(title) +
+        theme(legend.position=c(.9,.75),
+              legend.key.width = unit(2, "cm")
+              )
+    print(g)
   }
   
   if(save) {
-    dev.copy(png, file="./figure/plot3.png")
+    dev.copy(png, file="./plot3.png")
     dev.off()
   }
   
